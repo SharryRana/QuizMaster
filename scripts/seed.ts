@@ -1,7 +1,15 @@
 import mongoose from 'mongoose';
 import { defaultQuestions } from '../src/data/questions.js';
+import * as dotenv from 'dotenv';
 
-const MONGODB_URI = 'mongodb+srv://vercel-admin-user:eXLjskexgFOlbqzi@cluster0.o7ikq7t.mongodb.net/quizmaster?retryWrites=true&w=majority';
+// Load environment variables
+dotenv.config({ path: '.env.local' });
+
+const MONGODB_URI = process.env.MONGODB_URI;
+
+if (!MONGODB_URI) {
+  throw new Error('Please define the MONGODB_URI environment variable in .env.local');
+}
 
 interface IQuestion {
   q: string;
@@ -40,7 +48,7 @@ const Quiz = mongoose.models.Quiz || mongoose.model<IQuiz>('Quiz', QuizSchema);
 async function seedDatabase() {
   try {
     console.log('Connecting to MongoDB...');
-    await mongoose.connect(MONGODB_URI);
+    await mongoose.connect(MONGODB_URI as string);
     console.log('Connected to MongoDB successfully!');
 
     // Check if quizzes already exist
