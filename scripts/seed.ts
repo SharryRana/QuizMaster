@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { defaultQuestions } from '../src/data/questions.js';
 
-const MONGODB_URI = 'mongodb://localhost:27017/quizmaster';
+const MONGODB_URI = 'mongodb+srv://vercel-admin-user:eXLjskexgFOlbqzi@cluster0.o7ikq7t.mongodb.net/quizmaster?retryWrites=true&w=majority';
 
 interface IQuestion {
   q: string;
