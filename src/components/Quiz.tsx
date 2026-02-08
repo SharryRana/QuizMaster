@@ -94,11 +94,11 @@ export default function Quiz() {
 
   if (!currentQuestion) {
     return (
-      <div className="text-center p-8">
-        <p className="text-xl">Please select a quiz category from the home page.</p>
+      <div className="text-center p-6 sm:p-8">
+        <p className="text-lg sm:text-xl">Please select a quiz category from the home page.</p>
         <button
           onClick={() => setCurrentSection('home')}
-          className="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all"
+          className="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all min-h-[44px]"
         >
           Go to Home
         </button>
@@ -108,7 +108,7 @@ export default function Quiz() {
 
   const getOptionClass = (option: string) => {
     if (!isAnswered) {
-      return 'bg-gradient-to-r from-slate-50 to-blue-50 dark:from-slate-800 dark:to-indigo-900/40 border-slate-300 dark:border-slate-600 text-slate-800 dark:text-white hover:from-blue-100 hover:to-indigo-100 dark:hover:from-blue-900/60 dark:hover:to-indigo-800/60 hover:border-blue-600 dark:hover:border-indigo-400 hover:translate-x-3 hover:shadow-lg';
+      return 'bg-gradient-to-r from-slate-50 to-blue-50 dark:from-slate-800 dark:to-indigo-900/40 border-slate-300 dark:border-slate-600 text-slate-800 dark:text-white hover:from-blue-100 hover:to-indigo-100 dark:hover:from-blue-900/60 dark:hover:to-indigo-800/60 hover:border-blue-600 dark:hover:border-indigo-400 hover:translate-x-2 sm:hover:translate-x-3 hover:shadow-lg';
     }
 
     if (option === currentQuestion.answer) {
@@ -125,35 +125,35 @@ export default function Quiz() {
   return (
     <div>
       {/* Quiz Header */}
-      <div className="flex items-center justify-between gap-4 mb-6 flex-wrap">
-        <div className="font-bold text-xl px-6 py-3 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-lg shadow-lg">
+      <div className="flex items-center justify-between gap-3 sm:gap-4 mb-4 sm:mb-6 flex-wrap">
+        <div className="font-bold text-base sm:text-lg lg:text-xl px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-lg shadow-lg">
           {currentCategory}
         </div>
-        <div className={`text-xl font-bold px-6 py-3 rounded-lg border-2 shadow-lg transition-all ${
+        <div className={`text-base sm:text-lg lg:text-xl font-bold px-4 py-2 sm:px-6 sm:py-3 rounded-lg border-2 shadow-lg transition-all ${
           timer <= 10 
             ? 'bg-gradient-to-br from-red-500 to-orange-600 border-red-400 text-white animate-pulse' 
             : 'bg-gradient-to-br from-yellow-400 to-amber-500 dark:from-yellow-600 dark:to-amber-700 border-yellow-500 text-slate-900 dark:text-white'
         }`}>
           ⏱ {timer}s
         </div>
-        <div className="bg-gradient-to-br from-blue-600 to-indigo-700 text-white font-bold px-6 py-3 rounded-lg shadow-lg">
+        <div className="bg-gradient-to-br from-blue-600 to-indigo-700 text-white font-bold px-4 py-2 sm:px-6 sm:py-3 rounded-lg shadow-lg text-base sm:text-lg lg:text-xl">
           {currentIndex + 1}/{questions.length}
         </div>
       </div>
 
       {/* Question Box */}
-      <div className="bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 p-8 rounded-2xl shadow-2xl border-2 border-slate-200 dark:border-indigo-500/40">
-        <div className="font-bold text-3xl mb-8 leading-relaxed text-slate-800 dark:text-white">
+      <div className="bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 p-4 sm:p-6 lg:p-8 rounded-xl lg:rounded-2xl shadow-2xl border-2 border-slate-200 dark:border-indigo-500/40">
+        <div className="font-bold text-xl sm:text-2xl lg:text-3xl mb-4 sm:mb-6 lg:mb-8 leading-relaxed text-slate-800 dark:text-white">
           Q{currentIndex + 1}: {currentQuestion.q}
         </div>
 
-        <div className="space-y-4 mt-6">
+        <div className="space-y-3 sm:space-y-4 mt-4 sm:mt-6">
           {currentQuestion.options.map((option, idx) => (
             <div
               key={idx}
               onClick={() => handleSelectAnswer(option)}
-              className={`px-6 py-5 rounded-xl border-2 cursor-pointer font-semibold text-lg transition-all shadow-md ${getOptionClass(option)} ${
-                !isAnswered ? 'cursor-pointer' : 'cursor-not-allowed'
+              className={`px-4 py-3 sm:px-6 sm:py-4 lg:py-5 rounded-lg sm:rounded-xl border-2 cursor-pointer font-semibold text-sm sm:text-base lg:text-lg transition-all shadow-md min-h-[48px] flex items-center ${getOptionClass(option)} ${
+                !isAnswered ? 'cursor-pointer active:scale-95' : 'cursor-not-allowed'
               }`}
             >
               {option}
@@ -161,16 +161,16 @@ export default function Quiz() {
           ))}
         </div>
 
-        <div className="flex gap-4 justify-end mt-8">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-end mt-6 sm:mt-8">
           <button
             onClick={nextQuestion}
-            className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg font-bold text-lg transition-all hover:-translate-y-1 hover:shadow-2xl shadow-lg"
+            className="w-full sm:w-auto px-6 sm:px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg font-bold text-base sm:text-lg transition-all hover:-translate-y-1 hover:shadow-2xl shadow-lg min-h-[44px]"
           >
             Next Question →
           </button>
           <button
             onClick={endQuizEarly}
-            className="px-8 py-3 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white rounded-lg font-bold text-lg transition-all hover:-translate-y-1 hover:shadow-2xl shadow-lg"
+            className="w-full sm:w-auto px-6 sm:px-8 py-3 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white rounded-lg font-bold text-base sm:text-lg transition-all hover:-translate-y-1 hover:shadow-2xl shadow-lg min-h-[44px]"
           >
             End Quiz
           </button>
